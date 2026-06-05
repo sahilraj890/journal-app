@@ -64,7 +64,8 @@ public class UserScheduler {
                 try {
                     kafkaTemplate.send("weekly_sentiments", sentimentData.getEmail(), sentimentData);
                 } catch (Exception e) {
-                    log.error("Error while publishing the data to kafka", e);
+                    emailService.sendMail(sentimentData.getEmail(), "Sentiment for previous week ", sentimentData.getSentiment());
+//                    log.error("Error while publishing the data to kafka", e);
                 }
             }
         }
